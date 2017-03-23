@@ -1,0 +1,6 @@
+D:\programs\GIT_C#\Task_one\Task_one\Task_one\bin\Debug\Task_one.exe.config
+D:\programs\GIT_C#\Task_one\Task_one\Task_one\obj\Debug\Task_one.csprojResolveAssemblyReference.cache
+D:\programs\GIT_C#\Task_one\Task_one\Task_one\bin\Debug\Task_one.exe
+D:\programs\GIT_C#\Task_one\Task_one\Task_one\bin\Debug\Task_one.pdb
+D:\programs\GIT_C#\Task_one\Task_one\Task_one\obj\Debug\Task_one.exe
+D:\programs\GIT_C#\Task_one\Task_one\Task_one\obj\Debug\Task_one.pdb
