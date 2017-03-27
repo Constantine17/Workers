@@ -147,7 +147,7 @@ namespace Task_one
                     Console.WriteLine("{0}-th worker:",i+1);
                     parmamentwoker[i] = new PermanentWorker();
                     parmamentwoker[i].set_user();
-                    parmamentwoker[i].CulcSelary();
+                    parmamentwoker[i].CulcSelary();//
                 }
 
                 timewoker = new TimeWoker[quantity_parament_worker];
