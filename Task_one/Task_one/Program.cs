@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 
 
@@ -99,6 +100,20 @@ static class Counter_ID // class counter
     }
 }
 
+static class OnlyNumber
+{   private static string str;
+    public static int ReturnInt()
+    {
+        int number=0;
+        while (true)
+        {
+            str = Console.ReadLine();
+            if (Regex.IsMatch(str, @"\D") == false) { number = Convert.ToInt32(str); return number; }
+            else Console.WriteLine("Sorry, incorrect number! Please, try again:");
+        }
+    }
+}
+
 
 
 
@@ -123,6 +138,7 @@ namespace Task_one
             PermanentWorker[] parmamentwoker;
             TimeWoker[] timewoker;
 
+
             string yn; // user change
             for (; ; )
             {
@@ -135,24 +151,35 @@ namespace Task_one
 
             if (yn == "y" || yn == "yes" || yn == "Yes" || yn == "Y" || yn == "YES")
             {
-                //////////////////////////////////////////  random genaration all workers {
+                //////////////////////////////////////////  Input with Console {
                                            /// //// ADD TEST FOR NUMBER OF WRITELINE !!! //// ///
                 Console.WriteLine("How many parmanent worker do you add?");
-                quantity_parament_worker = Convert.ToInt32(Console.ReadLine());
+                quantity_parament_worker = OnlyNumber.ReturnInt();
 
-                parmamentwoker = new PermanentWorker[quantity_parament_worker];//random Time Worker
+
+                //Input with keybord PermanentWorker
+                parmamentwoker = new PermanentWorker[quantity_parament_worker];
                 for (int i = 0; i < quantity_parament_worker; i++)
                 {
-                    
                     Console.WriteLine("{0}-th worker:",i+1);
                     parmamentwoker[i] = new PermanentWorker();
                     parmamentwoker[i].set_user();
                     parmamentwoker[i].CulcSelary();
                 }
 
-                timewoker = new TimeWoker[quantity_parament_worker];
+                Console.WriteLine("How many time worker do you add?");
+                quantity_time_worker = OnlyNumber.ReturnInt();
 
-                //////////////////////////////////////////  random genaration all workers } 
+                //Input with keybord TimeWorker 
+                timewoker = new TimeWoker[quantity_parament_worker];
+                for (int i = 0; i < quantity_time_worker; i++)
+                {
+                    Console.WriteLine("{0}-th worker:", i + 1);
+                    timewoker[i] = new TimeWoker();
+                    timewoker[i].set_user();
+                    timewoker[i].CulcSelary();
+                }
+                //////////////////////////////////////////  Input with Console } 
             }
             else    /// rendom workers
             {
@@ -206,7 +233,7 @@ namespace Task_one
 
 
 
-            /////////////////////////////// bubble {
+            /////////////////////////////// bubble (Sorting in decreasing order) {
             size = Counter_ID.show_id();
             Worker[] mid = new Worker[1];
             for (int i = 0; i < size; i++)
@@ -220,20 +247,19 @@ namespace Task_one
                     }
                 }
             }
+
+            /////////////////////////////// bubble (Sorting in decreasing order) }
+
+
             
-            /////////////////////////////// bubble }
-
-
-
-            
-            Console.WriteLine("Sort:");
+            /////////////
+            Console.WriteLine("Sorting:");
             for (int i = 0; i < size; i++)
             {
                 work[i].get();
                 Console.WriteLine();
             }
-            
-
+            /////////////
 
 
                 Console.ReadKey();
