@@ -1,0 +1,33 @@
+﻿<project>
+<size counter="10" />
+<worker_0 id="6" selary="5491,2" last_name="LastName1" fist_name="FistName1" type="time">
+</worker_0>
+
+<worker_1 id="7" selary="5324,8" last_name="LastName2" fist_name="FistName2" type="time">
+</worker_1>
+
+<worker_2 id="8" selary="4160,0" last_name="LastName3" fist_name="FistName3" type="time">
+</worker_2>
+
+<worker_3 id="2" selary="3262" last_name="OtherLastName2" fist_name="OtherFistName2" type="permanent">
+</worker_3>
+
+<worker_4 id="0" selary="3097" last_name="OtherLastName0" fist_name="OtherFistName0" type="permanent">
+</worker_4>
+
+<worker_5 id="5" selary="2329,6" last_name="LastName0" fist_name="FistName0" type="time">
+</worker_5>
+
+<worker_6 id="9" selary="1664,0" last_name="LastName4" fist_name="FistName4" type="time">
+</worker_6>
+
+<worker_7 id="1" selary="1625" last_name="OtherLastName1" fist_name="OtherFistName1" type="permanent">
+</worker_7>
+
+<worker_8 id="3" selary="1158" last_name="OtherLastName3" fist_name="OtherFistName3" type="permanent">
+</worker_8>
+
+<worker_9 id="4" selary="1067" last_name="OtherLastName4" fist_name="OtherFistName4" type="permanent">
+</worker_9>
+
+</project>

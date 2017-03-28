@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Xml;
 
 
 
@@ -44,9 +46,22 @@ class Worker // parent class    daughter: PermanentWorker, TimeWorker
         Console.WriteLine("ID: {0}\nSelary: {1}$\nLast name: {2}\nFist name: {3}\nType: {4}", id,midSelary,lastName,fistName,type);
     }
 
-    public decimal get_selary()
+    public int get_id_num() { return id; }
+    public decimal get_selary() {  return midSelary; }
+    public string get_last_name() { return lastName; }
+    public string get_fist_name() { return fistName; }
+    public string get_type() { return type; }
+
+    public void File_add(string directory)
     {
-        return midSelary;
+        StreamWriter write_file = new StreamWriter(directory, true);
+        write_file.WriteLine("id: "+ id);
+        write_file.WriteLine("Selary: " + midSelary);
+        write_file.WriteLine("Last name: " + lastName);
+        write_file.WriteLine("Fist name: " + fistName);
+        write_file.WriteLine("Type: " + type);
+        write_file.WriteLine();
+        write_file.Close();
     }
 }
                            /// ////  ADD METOD FOR MID SELARY !!!! //// /// 
@@ -84,6 +99,7 @@ class TimeWoker : Worker //doughter class    parnet: Worker
     }
 }
 
+
 static class Counter_ID // class counter
 {
     private static int id;
@@ -100,7 +116,7 @@ static class Counter_ID // class counter
     }
 }
 
-static class OnlyNumber
+static class OnlyNumber  
 {   private static string str;
     public static int ReturnInt()
     {
@@ -113,7 +129,41 @@ static class OnlyNumber
         }
     }
 }
+static class XML
+{
+    public static void Write(string directory, Worker[] worker)
+    {
+        XmlTextWriter write = new XmlTextWriter(directory, Encoding.UTF8);
+        write.WriteStartElement("project"); write.WriteString("\n");//   <project>
 
+        write.WriteStartElement("size");//  <size>
+        int size = worker.Length;
+        write.WriteAttributeString("counter", Convert.ToString(size));
+        write.WriteEndElement(); write.WriteString("\n");//  </size>
+
+        for (int i = 0; i < size; i++)
+        {
+            write.WriteStartElement("worker_"+i);//   <worker>
+            write.WriteAttributeString("id", Convert.ToString(worker[i].get_id_num()));
+            write.WriteAttributeString("selary", Convert.ToString(worker[i].get_selary()));
+            write.WriteAttributeString("last_name", worker[i].get_last_name());
+            write.WriteAttributeString("fist_name", worker[i].get_fist_name());
+            write.WriteAttributeString("type", worker[i].get_type());
+
+            write.WriteString("\n");
+
+            write.WriteEndElement(); // </worker>
+
+            write.WriteString("\n"); write.WriteString("\n");
+        }
+
+
+        write.WriteEndElement();//  </project>
+        write.Close();
+    }
+}
+
+   
 
 
 
@@ -128,7 +178,10 @@ namespace Task_one
             int quantity_parament_worker=5; // array size of paramet worker
             int quantity_time_worker = 5;// array size of time worker
             int size = 0; // array size of all element
-
+            ///////////////
+            string directory = @"d:\programs\GIT_C#\Task_one\";
+            string file = @"file.txt";
+            string xml_file = @"file.xml";
             ////////////// identification worker options
             int id = 1;
             decimal selary = 1000;
@@ -137,7 +190,7 @@ namespace Task_one
             //////////////
             PermanentWorker[] parmamentwoker;
             TimeWoker[] timewoker;
-
+           // goto metka;
 
             string yn; // user change
             for (; ; )
@@ -149,7 +202,7 @@ namespace Task_one
             }
 
 
-            if (yn == "y" || yn == "yes" || yn == "Yes" || yn == "Y" || yn == "YES")
+            if (yn == "n" || yn == "no" || yn == "No" || yn == "N" || yn == "NO")
             {
                 //////////////////////////////////////////  Input with Console {
                                            /// //// ADD TEST FOR NUMBER OF WRITELINE !!! //// ///
@@ -251,17 +304,24 @@ namespace Task_one
             /////////////////////////////// bubble (Sorting in decreasing order) }
 
 
-            
+            StreamWriter cl = new StreamWriter(directory + file);
+            cl.Close();
             /////////////
-            Console.WriteLine("Sorting:");
+            Console.WriteLine(directory+file);
             for (int i = 0; i < size; i++)
             {
                 work[i].get();
                 Console.WriteLine();
+                work[i].File_add(directory+file);
             }
             /////////////
-
-
+        //metka:
+            //string str = @"d:\programs\GIT_C#\Task_one\file.txt";
+          //  File.CreateText(str)
+             //   File.
+            Console.WriteLine();
+            Console.WriteLine("//////////////////////////////////////////////");
+            XML.Write(directory+xml_file,work);
                 Console.ReadKey();
         }
     }

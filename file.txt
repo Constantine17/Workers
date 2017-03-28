@@ -1,0 +1,60 @@
+id: 6
+Selary: 5491,2
+Last name: LastName1
+Fist name: FistName1
+Type: time
+
+id: 7
+Selary: 5324,8
+Last name: LastName2
+Fist name: FistName2
+Type: time
+
+id: 8
+Selary: 4160,0
+Last name: LastName3
+Fist name: FistName3
+Type: time
+
+id: 2
+Selary: 3262
+Last name: OtherLastName2
+Fist name: OtherFistName2
+Type: permanent
+
+id: 0
+Selary: 3097
+Last name: OtherLastName0
+Fist name: OtherFistName0
+Type: permanent
+
+id: 5
+Selary: 2329,6
+Last name: LastName0
+Fist name: FistName0
+Type: time
+
+id: 9
+Selary: 1664,0
+Last name: LastName4
+Fist name: FistName4
+Type: time
+
+id: 1
+Selary: 1625
+Last name: OtherLastName1
+Fist name: OtherFistName1
+Type: permanent
+
+id: 3
+Selary: 1158
+Last name: OtherLastName3
+Fist name: OtherFistName3
+Type: permanent
+
+id: 4
+Selary: 1067
+Last name: OtherLastName4
+Fist name: OtherFistName4
+Type: permanent
+
