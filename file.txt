@@ -1,60 +1,33 @@
-id: 6
-Selary: 5491,2
-Last name: LastName1
-Fist name: FistName1
-Type: time
+﻿<project>
+<size counter="10" />
+<worker_0 id="0" selary="2150" last_name="OtherLastName0" fist_name="OtherFistName0" type="permanent">
+</worker_0>
 
-id: 7
-Selary: 5324,8
-Last name: LastName2
-Fist name: FistName2
-Type: time
+<worker_1 id="1" selary="5331" last_name="OtherLastName1" fist_name="OtherFistName1" type="permanent">
+</worker_1>
 
-id: 8
-Selary: 4160,0
-Last name: LastName3
-Fist name: FistName3
-Type: time
+<worker_2 id="2" selary="4710" last_name="OtherLastName2" fist_name="OtherFistName2" type="permanent">
+</worker_2>
 
-id: 2
-Selary: 3262
-Last name: OtherLastName2
-Fist name: OtherFistName2
-Type: permanent
+<worker_3 id="3" selary="5779" last_name="OtherLastName3" fist_name="OtherFistName3" type="permanent">
+</worker_3>
 
-id: 0
-Selary: 3097
-Last name: OtherLastName0
-Fist name: OtherFistName0
-Type: permanent
+<worker_4 id="4" selary="3686" last_name="OtherLastName4" fist_name="OtherFistName4" type="permanent">
+</worker_4>
 
-id: 5
-Selary: 2329,6
-Last name: LastName0
-Fist name: FistName0
-Type: time
+<worker_5 id="5" selary="5158,4" last_name="LastName0" fist_name="FistName0" type="time">
+</worker_5>
 
-id: 9
-Selary: 1664,0
-Last name: LastName4
-Fist name: FistName4
-Type: time
+<worker_6 id="6" selary="2163,2" last_name="LastName1" fist_name="FistName1" type="time">
+</worker_6>
 
-id: 1
-Selary: 1625
-Last name: OtherLastName1
-Fist name: OtherFistName1
-Type: permanent
+<worker_7 id="7" selary="4326,4" last_name="LastName2" fist_name="FistName2" type="time">
+</worker_7>
 
-id: 3
-Selary: 1158
-Last name: OtherLastName3
-Fist name: OtherFistName3
-Type: permanent
+<worker_8 id="8" selary="4492,8" last_name="LastName3" fist_name="FistName3" type="time">
+</worker_8>
 
-id: 4
-Selary: 1067
-Last name: OtherLastName4
-Fist name: OtherFistName4
-Type: permanent
+<worker_9 id="9" selary="5324,8" last_name="LastName4" fist_name="FistName4" type="time">
+</worker_9>
 
+</project>

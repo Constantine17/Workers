@@ -19,8 +19,11 @@ class Worker // parent class    daughter: PermanentWorker, TimeWorker
     private string fistName;
     protected string type;
 
+    /// <summary>
+    public virtual void CulcSelary(decimal selary) { Console.WriteLine("culcselary"); }
+    /// </summary>
 
-    public void set_user()
+    public void set_user()  // keyboard input 
     {
 
         //this.id = id;
@@ -32,7 +35,7 @@ class Worker // parent class    daughter: PermanentWorker, TimeWorker
 
     }
 
-    public void set_program(string lastName, string fistName)
+    public void set_program(string lastName, string fistName) //programm input
         {
            
             //this.id = id;
@@ -40,6 +43,16 @@ class Worker // parent class    daughter: PermanentWorker, TimeWorker
             this.lastName = lastName;
             this.fistName = fistName;
         }
+    public void set_program(int id, decimal selary,string lastName, string fistName, string type)
+    {
+        this.id = id;
+        this.midSelary = selary;
+        //this.id = Counter_ID.get_id();
+        this.lastName = lastName;
+        this.fistName = fistName;
+        this.type = type;
+        //Console.WriteLine("ID: {0}\nSelary: {1}$\nLast name: {2}\nFist name: {3}\nType: {4}", id, midSelary, lastName, fistName, type);
+    }
 
     public void get()//get information
     {
@@ -67,7 +80,7 @@ class Worker // parent class    daughter: PermanentWorker, TimeWorker
                            /// ////  ADD METOD FOR MID SELARY !!!! //// /// 
 class PermanentWorker : Worker //doughter class    parnet: Worker
 {
-   public void CulcSelary(decimal selary)// culculation salary of permanent worker 
+   public override void CulcSelary(decimal selary)// culculation salary of permanent worker 
     {
         this.midSelary = selary;
         this.type = "permanent";
@@ -84,7 +97,7 @@ class PermanentWorker : Worker //doughter class    parnet: Worker
 
 class TimeWoker : Worker //doughter class    parnet: Worker
 {
-    public void CulcSelary(decimal selary) // culculation salary of time worker
+    public override void CulcSelary(decimal selary) // culculation salary of time worker
     {
 
         this.midSelary = Convert.ToDecimal(20.8 * 8) * selary;
@@ -97,6 +110,42 @@ class TimeWoker : Worker //doughter class    parnet: Worker
        this.midSelary =Convert.ToDecimal(20.8 * 8) * Convert.ToDecimal(Console.ReadLine());
        this.type = "time";
     }
+}
+
+class AllWorkers : Worker // dougher class
+{
+    public Worker[] allworker ;
+    public int Length = 0;
+
+    /// //// Command association two array in single array //// /// {
+    public AllWorkers(Worker[] fistArraym, Worker[] secondArray)
+    {
+        int fistsize = fistArraym.Length;
+        int secondsize = secondArray.Length;
+        Length = fistArraym.Length + secondArray.Length;
+
+        allworker = new Worker[Length];
+ 
+        for(int i = 0; i< fistsize ; i++)
+        {
+            
+              allworker[i] = fistArraym[i];
+        }
+        for (int i = 0; i < secondsize; i++)
+        {
+
+            allworker[fistsize + i] = secondArray[i];
+        }
+    }
+    /// //// Command association two array in single array //// /// }
+
+
+    public void add(Worker[] fistArraym, Worker[] secondArray)
+    {
+        allworker = new Worker[Length]; // not working
+    }
+
+
 }
 
 
@@ -130,17 +179,22 @@ static class OnlyNumber
     }
 }
 static class XML
-{
+{ 
+    public static Worker[] array_workers;
+    public static int Length = 0;
+
+    /// //// Command write objects class in xml file //// /// {
     public static void Write(string directory, Worker[] worker)
     {
         XmlTextWriter write = new XmlTextWriter(directory, Encoding.UTF8);
-        write.WriteStartElement("project"); write.WriteString("\n");//   <project>
+        write.WriteStartElement("project"); write.WriteString("\n");//   <project>   /// open and start write file
 
         write.WriteStartElement("size");//  <size>
         int size = worker.Length;
         write.WriteAttributeString("counter", Convert.ToString(size));
         write.WriteEndElement(); write.WriteString("\n");//  </size>
 
+        /// //// write array objects {
         for (int i = 0; i < size; i++)
         {
             write.WriteStartElement("worker_"+i);//   <worker>
@@ -156,11 +210,54 @@ static class XML
 
             write.WriteString("\n"); write.WriteString("\n");
         }
+        /// //// write array objects }
 
-
-        write.WriteEndElement();//  </project>
-        write.Close();
+        write.WriteEndElement();//  </project>  /// close last an element
+        write.Close(); // save and close file 
     }
+    /// //// Command write objects class in xml file //// /// }
+
+
+    /// //// comand read objects class in xml file //// /// {
+    public static void Read(string directory)
+    {
+        XmlTextReader read_Length = new XmlTextReader(directory); //command reading array size
+
+        /// //// size array in xml file {
+        while (read_Length.Read()) 
+        {
+            if (read_Length.Name == "size") Length = Convert.ToInt32(read_Length.GetAttribute("counter"));
+        }
+        array_workers = new Worker[Length]; // memory for array
+        /// //// size array in xml file }
+        
+       // XmlTextReader read_worker = new XmlTextReader(directory);
+        for (int i = 0; i < Length; i++)
+        {
+            array_workers[i] = new Worker(); 
+            XmlTextReader read_worker = new XmlTextReader(directory); // command reading workers
+            int r_id = 5; decimal r_selary = 5; string r_lastname = "", r_fistname = "", r_type = ""; // intermediate variables
+            while (read_worker.Read())
+            {
+                
+                if (read_worker.Name == "worker_"+i && read_worker.GetAttribute("id")!=null) // test attribute worker
+                {
+
+                    /// //// reading attribute {
+                    r_id = Convert.ToInt32(read_worker.GetAttribute("id"));
+                    r_selary = Convert.ToDecimal(read_worker.GetAttribute("selary"));
+                    r_lastname = read_worker.GetAttribute("last_name");
+                    r_fistname = read_worker.GetAttribute("fist_name");
+                    r_type = read_worker.GetAttribute("type");
+                    /// //// reading attribute }
+                    
+                    array_workers[i].set_program(r_id, r_selary, r_lastname, r_fistname, r_type); // input array 
+                }
+            }
+        }
+    }
+    /// //// comand read objects class in xml file //// /// }
+
 }
 
    
@@ -190,7 +287,7 @@ namespace Task_one
             //////////////
             PermanentWorker[] parmamentwoker;
             TimeWoker[] timewoker;
-           // goto metka;
+            
 
             string yn; // user change
             for (; ; )
@@ -270,7 +367,7 @@ namespace Task_one
                 //////////////////////////////////////////  random genaration all workers }
             }
 
-
+            goto metka;
             /////////////////////////////// permanent workers and time workers in single array {
             size = Counter_ID.show_id();
             Worker [] work = new Worker[size];
@@ -315,13 +412,20 @@ namespace Task_one
                 work[i].File_add(directory+file);
             }
             /////////////
-        //metka:
+        metka: Console.WriteLine("//////////////////////////////////////////////");
             //string str = @"d:\programs\GIT_C#\Task_one\file.txt";
           //  File.CreateText(str)
              //   File.
+            
+        AllWorkers allworkers = new AllWorkers(parmamentwoker, timewoker);
+        XML.Read(directory + xml_file);
+        for (int i = 0; i < allworkers.Length; i++) 
+            XML.array_workers[i].get();
+          //  allworkers.allworker[i].get();
             Console.WriteLine();
-            Console.WriteLine("//////////////////////////////////////////////");
-            XML.Write(directory+xml_file,work);
+           // XML.Write(directory + xml_file, allworkers.allworker);
+            
+          //  XML.Write(directory+xml_file,work);
                 Console.ReadKey();
         }
     }
